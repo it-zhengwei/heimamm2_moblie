@@ -1,6 +1,7 @@
 <template>
   <div>
     哈哈
+    <i class="iconfont iconbianzu3"></i>
   </div>
 </template>
 

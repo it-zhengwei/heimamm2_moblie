@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// 导入字体图标样式
+import '@/style/iconfont.css'
+
 // 导入初始化样式
 import '@/style/base.less'
 // 导入normalize.css  抹平差异样式  让页面有一个统一的样式
