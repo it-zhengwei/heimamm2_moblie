@@ -1,7 +1,6 @@
 <template>
   <div>
     哈哈
-    <i class="iconfont iconbianzu3"></i>
   </div>
 </template>
 
@@ -9,10 +8,4 @@
 export default {}
 </script>
 
-<style lang="less">
-div {
-  width: 100px;
-  height: 100px;
-  background-color: @assist-color;
-}
-</style>
+<style lang="less"></style>
