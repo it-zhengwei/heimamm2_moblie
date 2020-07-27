@@ -3,35 +3,35 @@
     <div class="top">
       <div class="header">
         <div class="left">
-          <h1>续命咖啡</h1>
-          <p>面试不求人,我有面试宝典</p>
+          <h1>{{ userInfo.nickname }}</h1>
+          <p>{{ userInfo.intro }}</p>
         </div>
         <div class="right">
-          <img src="@/assets/01.jpg" alt="" />
+          <img :src="userInfo.avatar" alt="" />
         </div>
       </div>
       <ul class="data">
         <li>
-          <h1>298</h1>
+          <h1>{{ userInfo.submitNum }}</h1>
           <p>累计答题</p>
         </li>
         <li>
-          <h1>98</h1>
+          <h1>{{ userInfo.collectQuestions.length }}</h1>
           <p>收藏题目</p>
         </li>
         <li>
-          <h1>198</h1>
+          <h1>{{ userInfo.errorNum }}</h1>
           <p>我的错题</p>
         </li>
         <li>
-          <h1>76%</h1>
+          <h1>{{ accuracy }}%</h1>
           <p>正确率</p>
         </li>
       </ul>
       <div class="position">
         <cell
           title="我的岗位"
-          value="产品经理"
+          :value="userInfo.position"
           icon="iconicon_mine_gangwei"
         ></cell>
       </div>
@@ -40,18 +40,24 @@
       <h3>面经数据</h3>
       <ul>
         <li>
-          <div>昨日阅读<span>+300</span></div>
-          <h1>17</h1>
+          <div>
+            昨日阅读<span>{{ userInfo.shareData.read.yesterday }}</span>
+          </div>
+          <h1>{{ userInfo.shareData.read.total }}</h1>
           <p>阅读总数</p>
         </li>
         <li>
-          <div>昨日获取<span>+300</span></div>
-          <h1>297</h1>
+          <div>
+            昨日获取<span>{{ userInfo.shareData.star.yesterday }}</span>
+          </div>
+          <h1>{{ userInfo.shareData.star.total }}</h1>
           <p>获赞总数</p>
         </li>
         <li>
-          <div>昨日阅读<span>+12</span></div>
-          <h1>187</h1>
+          <div>
+            昨日阅读<span>{{ userInfo.shareData.comment.yesterday }}</span>
+          </div>
+          <h1>{{ userInfo.shareData.comment.total }}</h1>
           <p>评论总数</p>
         </li>
       </ul>
@@ -62,10 +68,14 @@
         value="21"
         icon="iconicon_mine_mianjing"
       ></cell>
-      <cell title="我的消息" value="99" icon="iconicon_mine_xiaoxi"></cell>
+      <cell
+        title="我的消息"
+        :value="userInfo.systemMessages"
+        icon="iconicon_mine_xiaoxi"
+      ></cell>
       <cell
         title="收藏的题库"
-        value="32"
+        :value="userInfo.collectQuestions.length"
         icon="iconicon_mine_tikushoucang"
       ></cell>
       <cell
@@ -73,10 +83,14 @@
         value="32"
         icon="iconicon_mine_qiyeshoucang"
       ></cell>
-      <cell title="我的错题" value="123" icon="iconicon_mine_cuoti"></cell>
+      <cell
+        title="我的错题"
+        :value="userInfo.errorQuestions.length"
+        icon="iconicon_mine_cuoti"
+      ></cell>
       <cell
         title="收藏的面试经验"
-        value="166"
+        :value="userInfo.starArticles.length"
         icon="iconbtn_shoucang_nor"
       ></cell>
     </div>
@@ -84,12 +98,23 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 // 导入自己封装的组件库的组件
 import cell from '@/views/my/cell.vue'
 export default {
   // 注册
   components: {
     cell
+  },
+  // 计算属性
+  computed: {
+    ...mapState(['userInfo']),
+    // 计算正确率
+    accuracy () {
+      return ((this.userInfo.submitNum - this.userInfo.errorNum) / 100).toFixed(
+        1
+      )
+    }
   }
 }
 </script>
@@ -141,6 +166,7 @@ export default {
       }
     }
     .data {
+      text-align: center;
       display: flex;
       justify-content: space-around;
       align-items: center;
