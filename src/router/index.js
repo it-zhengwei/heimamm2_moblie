@@ -9,28 +9,49 @@ import find from '@/views/find/index.vue'
 import my from '@/views/my/index.vue'
 // 问题组件
 import question from '@/views/question/index.vue'
+// 登录组件
+import login from '@/views/login/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/company'
+    redirect: '/login'
+  },
+  {
+    path: '/login',
+    component: login,
+    meta: {
+      isShow: false
+    }
   },
   {
     path: '/company',
-    component: company
+    component: company,
+    meta: {
+      isShow: true
+    }
   },
   {
     path: '/find',
-    component: find
+    component: find,
+    meta: {
+      isShow: true
+    }
   },
   {
     path: '/my',
-    component: my
+    component: my,
+    meta: {
+      isShow: true
+    }
   },
   {
     path: '/question',
-    component: question
+    component: question,
+    meta: {
+      isShow: true
+    }
   }
 ]
 

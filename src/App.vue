@@ -2,6 +2,7 @@
   <div class="app">
     <router-view></router-view>
     <van-tabbar
+      v-if="$route.meta.isShow == true"
       v-model="active"
       route
       active-color="#e40137"
