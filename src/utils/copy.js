@@ -31,8 +31,6 @@ copy.interceptors.response.use(
       return res.data
     } else if (code === 400 || code === 401 || code === 403) {
       return Promise.reject(new Error(res.data.message))
-    } else {
-      return Promise.reject(new Error())
     }
   },
   err => {

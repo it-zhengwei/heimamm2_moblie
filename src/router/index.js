@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// 导入我的资料组件
+import profile from '@/views/profile/index.vue'
 
 // 导入userInfo  api
 import { getUserInfo } from '@/api/userInfo.js'
@@ -63,6 +65,14 @@ const routes = [
     meta: {
       isShow: true
     }
+  },
+  {
+    path: '/profile',
+    component: profile,
+    meta: {
+      // 需要登录状态
+      needLogin: true
+    }
   }
 ]
 
@@ -79,8 +89,6 @@ VueRouter.prototype.push = function push (location, onResolve, onReject) {
 
 // 注册导航守卫
 router.beforeEach((to, from, next) => {
-  window.console.log(to)
-  window.console.log(from)
   // 登录校验
   // 判断当前页面是否是登录才能访问
   if (to.meta.needLogin) {
@@ -98,9 +106,9 @@ router.beforeEach((to, from, next) => {
             // 给图片地址拼接基地址
             res.data.avatar = process.env.VUE_APP_URL + res.data.avatar
             // 保存起来  不然我的页面没有信息
-            this.$store.commit('USERINFO', res.data)
+            store.commit('USERINFO', res.data)
             // 修改登录状态
-            this.$store.commit('ISLOGIN', true)
+            store.commit('ISLOGIN', true)
             // 允许通过
             next()
           })
@@ -113,11 +121,12 @@ router.beforeEach((to, from, next) => {
             // 跳转到登录页
             next('/login?target=' + to.fullPath)
           })
+      } else {
+        // 提示用户
+        Toast.fail('请登录')
+        // 强制切换到login页面  并且记录目标页面
+        next('/login?target=' + to.fullPath)
       }
-      // 提示用户
-      Toast.fail('请登录')
-      // 强制切换到login页面  并且记录目标页面
-      next('/login?target=' + to.fullPath)
     }
   } else {
     // 不需要登录 允许通过

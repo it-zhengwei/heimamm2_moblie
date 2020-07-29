@@ -19,6 +19,13 @@ export default new Vuex.Store({
       state.isLogin = data
     }
   },
+  getters: {
+    // 计算性别
+    getGender (state) {
+      const Arr = ['未知', '男', '女']
+      return Arr[state.userInfo.gender]
+    }
+  },
   actions: {},
   modules: {}
 })

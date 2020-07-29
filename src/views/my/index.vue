@@ -6,7 +6,7 @@
           <h1>{{ userInfo.nickname }}</h1>
           <p>{{ userInfo.intro }}</p>
         </div>
-        <div class="right">
+        <div class="right" @click="showProfile">
           <img :src="userInfo.avatar" alt="" />
         </div>
       </div>
@@ -102,6 +102,13 @@ import { mapState } from 'vuex'
 // 导入自己封装的组件库的组件
 
 export default {
+  methods: {
+    // 图片点击事件
+    showProfile () {
+      // 切换到我的资料页面
+      this.$router.push('/profile')
+    }
+  },
   // 计算属性
   computed: {
     ...mapState(['userInfo']),
