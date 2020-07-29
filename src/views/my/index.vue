@@ -107,9 +107,11 @@ export default {
     ...mapState(['userInfo']),
     // 计算正确率
     accuracy () {
-      return ((this.userInfo.submitNum - this.userInfo.errorNum) / 100).toFixed(
-        1
-      )
+      return (
+        ((this.userInfo.submitNum - this.userInfo.errorNum) /
+          this.userInfo.submitNum) *
+        100
+      ).toFixed(1)
     }
   }
 }
