@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="navBar">
-      <navBar></navBar>
+      <navBar @onClickLeft="onClickLeft"></navBar>
     </div>
     <h1>您好,请登录</h1>
     <van-form ref="form" @submit="onSubmit" class="form">
@@ -71,6 +71,15 @@ export default {
     }
   },
   methods: {
+    // 返回按钮功能
+    onClickLeft () {
+      // 判断上一页是否是需要登录的页面  是就跳转到发现页  否则就跳到上一页
+      if (this.$route.query.target) {
+        this.$router.push('/find')
+      } else {
+        this.$router.go(-1)
+      }
+    },
     // 全局验证成功就执行的函数
     onSubmit () {
       // 登录请求

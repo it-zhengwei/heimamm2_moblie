@@ -42,5 +42,11 @@ export default {
 <style lang="less">
 .navBar {
   height: 44px;
+  .van-nav-bar__left {
+    padding: 0;
+  }
+  .iconbtn_nav_back {
+    font-size: 40px;
+  }
 }
 </style>

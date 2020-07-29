@@ -159,6 +159,7 @@ export default {
         border-radius: 50%;
         img {
           width: 100%;
+          height: 100%;
           border-radius: 50%;
         }
       }
