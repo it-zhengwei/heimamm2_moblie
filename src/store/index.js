@@ -5,11 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 设置一个是否登录的状态属性
+    isLogin: false,
     userInfo: ''
   },
   mutations: {
-    userInfo (state, data) {
+    // 修改用户信息
+    USERINFO (state, data) {
       state.userInfo = data
+    },
+    // 修改登录状态
+    ISLOGIN (state, data) {
+      state.isLogin = data
     }
   },
   actions: {},

@@ -80,10 +80,18 @@ export default {
         // 把基地址拼接到图片地址
         res.data.user.avatar = process.env.VUE_APP_URL + res.data.user.avatar
         // 把用户数据给vuex
-        this.$store.commit('userInfo', res.data.user)
+        this.$store.commit('USERINFO', res.data.user)
+        // 修改登录状态值
+        this.$store.commit('ISLOGIN', true)
+        if (this.$route.query.target) {
+          // 如果是记录有目标页面登录就跳转到目标页面
+          this.$router.push(this.$route.query.target)
+        } else {
+          // 如果没有目标页面就跳转到发现页
+          this.$router.push('/find')
+        }
+
         this.$toast.success('登录成功')
-        // 跳转到公司页面
-        this.$router.push('/company')
       })
     },
     // 获取验证码

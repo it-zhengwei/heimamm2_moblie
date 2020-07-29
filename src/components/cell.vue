@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'cell',
   props: ['title', 'value', 'icon']
 }
 </script>
