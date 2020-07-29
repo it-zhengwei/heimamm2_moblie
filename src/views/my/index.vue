@@ -100,12 +100,8 @@
 <script>
 import { mapState } from 'vuex'
 // 导入自己封装的组件库的组件
-import cell from '@/views/my/cell.vue'
+
 export default {
-  // 注册
-  components: {
-    cell
-  },
   // 计算属性
   computed: {
     ...mapState(['userInfo']),
