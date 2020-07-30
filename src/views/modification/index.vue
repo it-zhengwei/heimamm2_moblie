@@ -53,6 +53,8 @@ export default {
     if (this.key !== 'avatar') {
       // 获取当前字段的信息
       this.value = this.userInfo[this.key]
+    } else {
+      this.fileList[0].url = this.userInfo[this.key]
     }
   },
   computed: {
@@ -62,6 +64,11 @@ export default {
     ...mapMutations(['EIDTPARTUSERINFO']),
     // 保存按钮功能
     onClickRight () {
+      // 如果用户没有修改图片 提示用户修改
+      if (this.avatarId === '' && this.key === 'avatar') {
+        this.$toast.fail('请修改图片')
+        return
+      }
       // 提示加载
       this.$toast.loading({
         message: '加载中...',
@@ -105,9 +112,6 @@ export default {
       data.append('files', file.file)
       // 发送请求
       upload(data).then(res => {
-        window.console.log(res)
-
-        this.fileList[0].url = process.env.VUE_APP_URL + res.data[0].url
         this.fileList[0].status = 'done'
         this.fileList[0].message = '上传成功'
         // 获取id
