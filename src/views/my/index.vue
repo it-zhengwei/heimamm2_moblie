@@ -31,6 +31,7 @@
       <div class="position">
         <cell
           title="我的岗位"
+          @click="editUserInfo('position')"
           :value="userInfo.position"
           icon="iconicon_mine_gangwei"
         ></cell>
@@ -103,6 +104,10 @@ import { mapState } from 'vuex'
 
 export default {
   methods: {
+    // 编辑岗位
+    editUserInfo (key) {
+      this.$router.push('/modification?key=' + key)
+    },
     // 图片点击事件
     showProfile () {
       // 切换到我的资料页面

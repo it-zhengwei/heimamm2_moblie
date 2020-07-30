@@ -7,5 +7,23 @@ function getUserInfo () {
     needToken: true
   })
 }
+// 修改用户信息
+function editUserInfo (data) {
+  return copy({
+    url: '/au/edit',
+    method: 'post',
+    data,
+    needToken: true
+  })
+}
+// 上传
+function upload (data) {
+  return copy({
+    url: '/upload',
+    method: 'post',
+    data,
+    needToken: true
+  })
+}
 // 暴露出去
-export { getUserInfo }
+export { getUserInfo, editUserInfo, upload }

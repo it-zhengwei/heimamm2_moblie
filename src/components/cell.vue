@@ -1,5 +1,5 @@
 <template>
-  <van-cell :title="title" :value="value" class="cell">
+  <van-cell :title="title" :value="value" @click="parent" class="cell">
     <template #icon>
       <i class="iconfont" :class="icon"></i>
     </template>
@@ -15,7 +15,12 @@
 <script>
 export default {
   name: 'cell',
-  props: ['title', 'value', 'icon']
+  props: ['title', 'value', 'icon'],
+  methods: {
+    parent () {
+      this.$emit('click')
+    }
+  }
 }
 </script>
 

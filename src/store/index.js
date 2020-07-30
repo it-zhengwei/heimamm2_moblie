@@ -17,6 +17,10 @@ export default new Vuex.Store({
     // 修改登录状态
     ISLOGIN (state, data) {
       state.isLogin = data
+    },
+    // 修改部分用户信息
+    EIDTPARTUSERINFO (state, { key, value }) {
+      state.userInfo[key] = value
     }
   },
   getters: {

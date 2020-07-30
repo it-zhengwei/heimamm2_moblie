@@ -12,6 +12,8 @@ import { Toast } from 'vant'
 // 导入store
 import store from '@/store/index.js'
 // 导入组件
+// 导入修改信息组件
+import modification from '@/views/modification/index.vue'
 // 公司组件
 import company from '@/views/company/index.vue'
 // 发现组件
@@ -71,6 +73,13 @@ const routes = [
     component: profile,
     meta: {
       // 需要登录状态
+      needLogin: true
+    }
+  },
+  {
+    path: '/modification',
+    component: modification,
+    meta: {
       needLogin: true
     }
   }
