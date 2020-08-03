@@ -5,7 +5,7 @@
       class="top"
       @onClickLeft="onClickLeft"
       @onClickRight="onClickRight"
-      value="保存"
+      :value="userInfo[key] === this.value ? '' : '保存'"
     ></navBar>
     <van-field
       v-if="key !== 'avatar'"
@@ -49,11 +49,10 @@ export default {
     this.key = this.$route.query.key
     // 根据携带的参数获取对应的标题
     this.title = '修改' + this.titleObj[this.key]
+    this.value = this.userInfo[this.key]
     // 判断当前字段是否是avatar
-    if (this.key !== 'avatar') {
+    if (this.key === 'avatar') {
       // 获取当前字段的信息
-      this.value = this.userInfo[this.key]
-    } else {
       this.fileList[0].url = this.userInfo[this.key]
     }
   },
@@ -64,11 +63,15 @@ export default {
     ...mapMutations(['EIDTPARTUSERINFO']),
     // 保存按钮功能
     onClickRight () {
-      // 如果用户没有修改图片 提示用户修改
-      if (this.avatarId === '' && this.key === 'avatar') {
-        this.$toast.fail('请修改图片')
+      // 如果用户没有修改虽然没有保存两个字 但是功能还是存在的
+      if (this.userInfo[this.key] === this.value) {
         return
       }
+      // // 如果用户没有修改图片 提示用户修改
+      // if (this.avatarId === '' && this.key === 'avatar') {
+      //   this.$toast.fail('请修改图片')
+      //   return
+      // }
       // 提示加载
       this.$toast.loading({
         message: '加载中...',
@@ -76,17 +79,15 @@ export default {
       })
       // 声明一个空对象
       const nullObj = {}
-      if (this.key !== 'avatar') {
-        // 把当前字段和修改的值保存进去
-        nullObj[this.key] = this.value
-      } else {
-        nullObj[this.key] = this.avatarId
-      }
+
+      // 把当前字段和修改的值保存进去
+      nullObj[this.key] = this.value
+
       // 发送请求
       editUserInfo(nullObj).then(res => {
         if (this.key !== 'avatar') {
           // 保存到vuex
-          this.EIDTPARTUSERINFO({ key: this.key, value: res.data[this.key] })
+          this.EIDTPARTUSERINFO({ key: this.key, value: this.value })
         } else {
           res.data.avatar = process.env.VUE_APP_URL + res.data.avatar
           // 保存到vuex
@@ -115,7 +116,7 @@ export default {
         this.fileList[0].status = 'done'
         this.fileList[0].message = '上传成功'
         // 获取id
-        this.avatarId = res.data[0].id
+        this.value = res.data[0].id
       })
     }
   }
